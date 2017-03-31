@@ -31,6 +31,7 @@ Variables
 * `vault_version`: The version of Vault to install.
 * `vault_checksum`: The checksum of the tarball provided by Hashicorp.
 * `vault_platform`: The platform of the vault binary (default to linux amd64).
+* `vault_groups`: The groups you want the user to be part of.
 
 License
 -------

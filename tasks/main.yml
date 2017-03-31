@@ -8,6 +8,7 @@
   user:
     name: vault
     group: vault
+    groups: "{{ vault_groups|default(omit) }}"
     createhome: no
     system: yes
   tags: ['vault']

@@ -7,8 +7,7 @@
 - name: "Create the vault user"
   user:
     name: vault
-    group: vault
-    groups: "{{ vault_groups|default(omit) }}"
+    groups: "{{ vault_groups|default('vault') }}"
     createhome: no
     system: yes
   tags: ['vault']

@@ -1,3 +1,4 @@
-vault_version: 0.7.1
-vault_checksum: a576fe2c717ea4b5968477757196ff5308dbded4f5083c91d9e2ea824d2d6fdc
+vault_version: 0.8.2
+vault_checksum: b7050bbc0b9ad554dd03040d1e5ad9c3b0cafde7e781f65433e4db5d05882245
 vault_platform: linux_amd64
+vault_config: vault.hcl.j2

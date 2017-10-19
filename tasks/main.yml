@@ -46,7 +46,7 @@
 - name: "Set vault binary capabilities"
   capabilities:
     path: /usr/local/bin/vault
-    capability: cap_ipc_lock=+ep
+    capability: cap_ipc_lock+ep
     state: present
 
 - name: "Create vault directories"

@@ -1,4 +1,4 @@
-ansible-vault
+ansible-vault [![Build Status](https://travis-ci.org/AerisCloud/ansible-vault.svg?branch=master)](https://travis-ci.org/AerisCloud/ansible-vault)
 =============
 
 Install a Vault server.

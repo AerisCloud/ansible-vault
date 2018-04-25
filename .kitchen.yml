@@ -26,10 +26,13 @@ platforms:
         # necessary for serverspec
         - yum install -y iproute
         - systemctl enable sshd.service
-  - name: debian-8
+  - name: debian-9
     driver_config:
-      run_command: /sbin/init
+      run_command: /bin/systemd
       privileged: true
+      provision_command:
+        - apt-get update
+        - apt-get install -y ansible
 
 verifier:
   name: serverspec

@@ -1,3 +1,11 @@
+- name: "Load distribution variables"
+  include_vars: "{{lookup('first_found', {'files': var_files, 'paths': [ 'vars' ]})}}"
+  vars:
+    var_files:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - "main.yml"
+
 - name: "Create the vault group"
   group:
     name: vault
@@ -10,7 +18,7 @@
     createhome: no
     system: yes
 
-- name: "Check installed vault version"
+- name: "Check installed vault version (should be {{vault_version}})"
   shell: vault version | grep -Po '(?<=Vault v)(\d+.\d+.\d+)'
   ignore_errors: True
   changed_when: False
@@ -25,10 +33,13 @@
     group: root
     mode: 0644
   register: vault_download
-  when: vault_installed_version|failed or vault_installed_version.stdout != vault_version
+  when: vault_installed_version is failed or vault_installed_version.stdout != vault_version
 
-- name: "Make sure that unzip is installed"
-  package: name=unzip state=present
+- name: "Install package dependencies"
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ pkg_dependencies }}"
 
 - name: "Unzip vault archive"
   unarchive:
@@ -38,7 +49,7 @@
     owner: root
     group: root
     mode: 0755
-  when: vault_installed_version|failed or vault_installed_version.stdout != vault_version
+  when: vault_installed_version is failed or vault_installed_version.stdout != vault_version
   notify: Restart vault
 
 # See https://www.vaultproject.io/docs/configuration/index.html#disable_mlock
